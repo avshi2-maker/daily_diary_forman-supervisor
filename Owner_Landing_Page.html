@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>אישור דוח עבודה - Stonhard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Heebo', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Security Badge */
+        .security-banner {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .security-icon {
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .security-text {
+            flex: 1;
+        }
+        
+        .security-text h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 3px;
+        }
+        
+        .security-text p {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Project Manager Card */
+        .foreman-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+        
+        .foreman-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            border: 4px solid #f0f0f0;
+        }
+        
+        .foreman-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .foreman-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .report-badge {
+            background: #ecf0f1;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        /* Project Info */
+        .project-info {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .project-icon {
+            font-size: 28px;
+        }
+        
+        .project-details h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+        
+        .project-date {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* Action Menu */
+        .action-menu {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .menu-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .action-btn {
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+        
+        .btn-camera {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+            color: white;
+        }
+        
+        .btn-send {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+        
+        .btn-icon {
+            font-size: 24px;
+        }
+        
+        .btn-text {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .btn-subtitle {
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-btn {
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .quick-btn .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .quick-btn .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        /* Signature Pad */
+        .signature-container {
+            margin: 20px 0;
+        }
+        
+        .signature-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .signature-pad {
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            cursor: crosshair;
+            touch-action: none;
+            width: 100%;
+            height: 180px;
+            background: #fafafa;
+        }
+        
+        .signature-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .signature-controls button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Photo Upload */
+        .photo-upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .photo-upload-area:hover {
+            background: #f0f0f0;
+            border-color: #764ba2;
+        }
+        
+        .photo-upload-area input {
+            display: none;
+        }
+        
+        .upload-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+        
+        .photo-preview {
+            margin-top: 20px;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            display: block;
+        }
+        
+        .remove-photo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* Success Screen */
+        .success-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounceIn 0.6s;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .success-message {
+            font-size: 16px;
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .success-details {
+            background: #ecf0f1;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: right;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        /* Google Drive Badge */
+        .gdrive-badge {
+            background: #4285f4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        /* Helper Text */
+        .helper-text {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            color: #856404;
+            margin: 15px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .helper-icon {
+            font-size: 18px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        
+        <!-- Security Banner -->
+        <div class="security-banner">
+            <div class="security-icon">🔒</div>
+            <div class="security-text">
+                <h3>דוח מאובטח ומאומת</h3>
+                <p>נשלח אליך מאבשי ספיר - מנהל פרויקט</p>
+            </div>
+        </div>
+
+        <!-- Project Manager Card -->
+        <div class="foreman-card">
+            <div class="foreman-avatar">א״ס</div>
+            <div class="foreman-name">אבשי ספיר</div>
+            <div class="foreman-title">מנהל פרויקט | Stonhard Installation</div>
+            <div class="report-badge">
+                📋 דוח יומי לאישור
+            </div>
+        </div>
+
+        <!-- Project Info -->
+        <div class="project-info">
+            <div class="project-header">
+                <div class="project-icon">🏗️</div>
+                <div class="project-details">
+                    <h2 id="projectName">פרוייקט תמר גרופ - קיסריה</h2>
+                    <div class="project-date" id="reportDate"></div>
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">מזג אוויר:</span>
+                <span class="info-value" id="weather">☀️ שמש</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">שעות עבודה:</span>
+                <span class="info-value" id="workHours">8.0 שעות</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">סה"כ עובדים:</span>
+                <span class="info-value" id="totalWorkers">6 עובדים</span>
+            </div>
+        </div>
+
+        <!-- Helper Text -->
+        <div class="helper-text">
+            <div class="helper-icon">💡</div>
+            <div>
+                בחר אחת מהאפשרויות למטה לאישור הדוח.<br>
+                התהליך לוקח פחות מ-2 דקות.
+            </div>
+        </div>
+
+        <!-- Quick Actions (Optional - for faster workflow) -->
+        <div class="quick-actions">
+            <div class="quick-btn" onclick="quickApprove()">
+                <div class="icon">✅</div>
+                <div class="label">אישור מהיר</div>
+            </div>
+            <div class="quick-btn" onclick="viewFullReport()">
+                <div class="icon">📄</div>
+                <div class="label">צפייה מלאה</div>
+            </div>
+        </div>
+
+        <!-- Action Menu -->
+        <div class="action-menu">
+            <div class="menu-title">בחר פעולה:</div>
+            
+            <button class="action-btn btn-primary" onclick="viewAndSign()">
+                <span class="btn-icon">📝</span>
+                <div class="btn-text">
+                    צפייה בדוח וחתימה דיגיטלית
+                    <div class="btn-subtitle">פתח, קרא, חתום על המסך ושלח</div>
+                </div>
+            </button>
+
+            <button class="action-btn btn-camera" onclick="uploadSignedDoc()">
+                <span class="btn-icon">📸</span>
+                <div class="btn-text">
+                    צילום מסמך חתום
+                    <div class="btn-subtitle">אם חתמת על עותק מודפס</div>
+                </div>
+            </button>
+
+            <button class="action-btn btn-success" onclick="sendToProject Manager()">
+                <span class="btn-icon">✍️</span>
+                <div class="btn-text">
+                    שלח חזרה למנהל העבודה
+                    <div class="btn-subtitle">לאחר חתימה או צילום</div>
+                </div>
+            </button>
+
+            <button class="action-btn btn-send" onclick="saveToGoogleDrive()">
+                <span class="btn-icon">☁️</span>
+                <div class="btn-text">
+                    שמור ל-Google Drive
+                    <div class="btn-subtitle">גיבוי אוטומטי בענן</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Stonhard Installation | Secure Work Journal System<br>
+            📱 050-5231042 | 📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38295908b8aa39082938a918a8ecd808c8e">[email&#160;protected]</a>
+        </div>
+    </div>
+
+    <!-- Modal: View & Sign -->
+    <div id="viewSignModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📝 צפייה וחתימה על הדוח</div>
+            
+            <div class="modal-body">
+                <!-- Report Summary -->
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:20px;">
+                    <h4 style="margin-bottom:10px;color:#2c3e50;">סיכום הדוח:</h4>
+                    <p style="font-size:14px;color:#666;line-height:1.6;" id="reportSummary">
+                        עבודות התקנת רצפה אפוקסי באולם הייצור.<br>
+                        6 עובדים, 8 שעות עבודה יעילה.<br>
+                        בוצע ציפוי שכבה ראשונה באזור A.
+                    </p>
+                </div>
+                
+                <!-- Site Photos (if available) -->
+                <div id="reportPhotosSection" style="margin-bottom:20px; display:none;">
+                    <h4 style="margin-bottom:10px;color:#2c3e50;">📸 תמונות מהאתר:</h4>
+                    <div id="reportPhotosGrid" class="photo-preview" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px;">
+                        <!-- Photos will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Owner Details -->
+                <div class="form-group">
+                    <label>שמך המלא:</label>
+                    <input type="text" id="ownerName" placeholder="שם מלא">
+                </div>
+
+                <div class="form-group">
+                    <label>הערות (אופציונלי):</label>
+                    <textarea id="ownerRemarks" placeholder="הוסף הערות, תיקונים, או הנחיות..."></textarea>
+                </div>
+
+                <!-- Signature -->
+                <div class="signature-container">
+                    <div class="signature-label">חתימה:</div>
+                    <canvas id="ownerSignature" class="signature-pad" width="800" height="180"></canvas>
+                    <div class="signature-controls">
+                        <button style="background:#e74c3c;color:white;" onclick="clearSignature()">🗑️ נקה</button>
+                        <button style="background:#27ae60;color:white;" onclick="saveSignature()">💾 אישור וחתימה</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="action-btn" style="background:#95a5a6;color:white;margin-top:10px;" onclick="closeModal('viewSignModal')">
+                <span class="btn-icon">✖️</span>
+                <span class="btn-text">ביטול</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Upload Photo -->
+    <div id="uploadPhotoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📸 צילום מסמך חתום</div>
+            
+            <div class="modal-body">
+                <div class="helper-text">
+                    <div class="helper-icon">ℹ️</div>
+                    <div>
+                        צלם את המסמך החתום בתאורה טובה.<br>
+                        וודא שהחתימה ברורה וקריאה.
+                    </div>
+                </div>
+
+                <div class="photo-upload-area" onclick="document.getElementById('photoInput').click()">
+                    <div class="upload-icon">📷</div>
+                    <div style="font-weight:600;margin-bottom:5px;">לחץ לצילום</div>
+                    <div style="font-size:13px;color:#666;">או בחר תמונה מהגלריה</div>
+                    <input type="file" id="photoInput" accept="image/*" capture="environment" onchange="handlePhotoUpload(event)">
+                </div>
+
+                <div id="photoPreview" class="photo-preview"></div>
+
+                <div class="form-group">
+                    <label>הערה למסמך (אופציונלי):</label>
+                    <textarea id="photoRemarks" placeholder="הערות נוספות על המסמך..."></textarea>
+                </div>
+            </div>
+
+            <button class="action-btn btn-success" onclick="confirmPhotoUpload()">
+                <span class="btn-icon">✅</span>
+                <span class="btn-text">אישור והמשך</span>
+            </button>
+
+            <button class="action-btn" style="background:#95a5a6;color:white;margin-top:10px;" onclick="closeModal('uploadPhotoModal')">
+                <span class="btn-icon">✖️</span>
+                <span class="btn-text">ביטול</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Success -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-screen">
+                <div class="success-icon">✅</div>
+                <div class="success-title">תודה על האישור!</div>
+                <div class="success-message">
+                    דוח העבודה אושר ונשלח בהצלחה<br>
+                    חזרה למנהל העבודה
+                </div>
+
+                <div class="success-details">
+                    <div class="detail-row">
+                        <span>פרוייקט:</span>
+                        <span id="successProject">תמר גרופ</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>תאריך דוח:</span>
+                        <span id="successDate"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span>זמן אישור:</span>
+                        <span id="approvalTime">--:--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>שם מאשר:</span>
+                        <span id="approverName">---</span>
+                    </div>
+                </div>
+
+                <div class="gdrive-badge" id="gdriveBadge" style="display:none;">
+                    <span>☁️</span>
+                    <span>נשמר ב-Google Drive</span>
+                </div>
+
+                <button class="action-btn btn-send" onclick="sendViaWhatsApp()" style="margin-top:20px;">
+                    <span class="btn-icon">📱</span>
+                    <span class="btn-text">שלח ב-WhatsApp</span>
+                </button>
+
+                <button class="action-btn" style="background:#ecf0f1;color:#2c3e50;margin-top:10px;" onclick="closeAll()">
+                    <span class="btn-icon">🏠</span>
+                    <span class="btn-text">סגור</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Global State
+        let reportData = {
+            projectName: 'פרוייקט תמר גרופ - קיסריה',
+            reportDate: new Date().toISOString().split('T')[0],
+            foremanName: 'אבשי ספיר',
+            foremanPhone: '0505231042',
+            ownerSignature: null,
+            uploadedPhotos: [],
+            approvalTimestamp: null
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReportData();
+            initSignaturePad();
+        });
+
+        // Load report data from URL params or localStorage
+        function loadReportData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Set current date if not provided
+            const currentDate = new Date();
+            const hebrewDate = currentDate.toLocaleDateString('he-IL', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            if (urlParams.get('project')) {
+                reportData.projectName = decodeURIComponent(urlParams.get('project'));
+                document.getElementById('projectName').textContent = reportData.projectName;
+            }
+            
+            if (urlParams.get('date')) {
+                reportData.reportDate = urlParams.get('date');
+                document.getElementById('reportDate').textContent = formatDate(urlParams.get('date'));
+            } else {
+                // Use current date if not provided
+                reportData.reportDate = currentDate.toISOString().split('T')[0];
+                document.getElementById('reportDate').textContent = hebrewDate;
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('he-IL', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Signature Pad
+        let signaturePad;
+
+        function initSignaturePad() {
+            const canvas = document.getElementById('ownerSignature');
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches ? e.touches[0] : e;
+                return {
+                    x: (touch.clientX - rect.left) * (canvas.width / rect.width),
+                    y: (touch.clientY - rect.top) * (canvas.height / rect.height)
+                };
+            }
+
+            function startDrawing(e) {
+                e.preventDefault();
+                isDrawing = true;
+                const pos = getPos(e);
+                lastX = pos.x;
+                lastY = pos.y;
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                
+                const pos = getPos(e);
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                
+                lastX = pos.x;
+                lastY = pos.y;
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+            }
+
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            canvas.addEventListener('touchstart', startDrawing);
+            canvas.addEventListener('touchmove', draw);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            signaturePad = { canvas, ctx };
+        }
+
+        function clearSignature() {
+            const ctx = signaturePad.ctx;
+            ctx.clearRect(0, 0, signaturePad.canvas.width, signaturePad.canvas.height);
+        }
+
+        function saveSignature() {
+            const ownerName = document.getElementById('ownerName').value.trim();
+            
+            if (!ownerName) {
+                alert('❌ נא למלא את שמך');
+                return;
+            }
+
+            const signatureData = signaturePad.canvas.toDataURL('image/png');
+            reportData.ownerSignature = signatureData;
+            reportData.ownerName = ownerName;
+            reportData.ownerRemarks = document.getElementById('ownerRemarks').value;
+            reportData.approvalTimestamp = new Date().toISOString();
+            
+            closeModal('viewSignModal');
+            showSuccess();
+        }
+
+        // Photo Upload
+        let uploadedPhotos = [];
+
+        function handlePhotoUpload(e) {
+            const files = e.target.files;
+            const preview = document.getElementById('photoPreview');
+            
+            for (let file of files) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    const photoData = event.target.result;
+                    uploadedPhotos.push(photoData);
+                    
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = 'photo-item';
+                    photoDiv.innerHTML = `
+                        <img src="${photoData}" alt="מסמך חתום">
+                        <button class="remove-photo" onclick="removePhoto(${uploadedPhotos.length - 1})">×</button>
+                    `;
+                    preview.appendChild(photoDiv);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removePhoto(index) {
+            uploadedPhotos.splice(index, 1);
+            rebuildPhotoPreview();
+        }
+
+        function rebuildPhotoPreview() {
+            const preview = document.getElementById('photoPreview');
+            preview.innerHTML = '';
+            
+            uploadedPhotos.forEach((photo, idx) => {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo-item';
+                photoDiv.innerHTML = `
+                    <img src="${photo}" alt="מסמך חתום">
+                    <button class="remove-photo" onclick="removePhoto(${idx})">×</button>
+                `;
+                preview.appendChild(photoDiv);
+            });
+        }
+
+        function confirmPhotoUpload() {
+            if (uploadedPhotos.length === 0) {
+                alert('❌ נא לצלם או להעלות תמונה של המסמך החתום');
+                return;
+            }
+
+            reportData.uploadedPhotos = uploadedPhotos;
+            reportData.photoRemarks = document.getElementById('photoRemarks').value;
+            reportData.approvalTimestamp = new Date().toISOString();
+            
+            closeModal('uploadPhotoModal');
+            showSuccess();
+        }
+
+        // Actions
+        function quickApprove() {
+            const confirmed = confirm('אישור מהיר?\n\nפעולה זו תאשר את הדוח ללא הערות נוספות.');
+            if (confirmed) {
+                reportData.approvalTimestamp = new Date().toISOString();
+                reportData.ownerName = 'אושר מהיר';
+                showSuccess();
+            }
+        }
+
+        function viewFullReport() {
+            alert('פתיחת דוח מלא...\n(כאן יפתח הדוח המלא ב-PDF או HTML)');
+        }
+
+        function viewAndSign() {
+            openModal('viewSignModal');
+        }
+
+        function uploadSignedDoc() {
+            openModal('uploadPhotoModal');
+        }
+
+        function sendToProject Manager() {
+            if (!reportData.approvalTimestamp) {
+                alert('❌ נא לאשר את הדוח תחילה\n\nבחר באחת מהאפשרויות:\n• חתימה דיגיטלית\n• צילום מסמך חתום');
+                return;
+            }
+
+            showSuccess();
+            setTimeout(() => {
+                sendViaWhatsApp();
+            }, 1000);
+        }
+
+        function saveToGoogleDrive() {
+            alert('💾 שומר ל-Google Drive...\n\n(פונקציה זו תופעל באינטגרציה עם Google Drive API)');
+            
+            // Simulate save
+            setTimeout(() => {
+                document.getElementById('gdriveBadge').style.display = 'flex';
+                alert('✅ נשמר בהצלחה ב-Google Drive!');
+            }, 1500);
+        }
+
+        function sendViaWhatsApp() {
+            const message = `✅ *דוח עבודה מאושר*
+
+🏗️ *פרוייקט:* ${reportData.projectName}
+📅 *תאריך דוח:* ${formatDate(reportData.reportDate)}
+👷 *מנהל פרויקט:* ${reportData.foremanName}
+👤 *אושר ע"י:* ${reportData.ownerName || 'בעל/מנהל'}
+⏰ *זמן אישור:* ${new Date().toLocaleTimeString('he-IL')}
+
+${reportData.ownerRemarks ? `💬 *הערות:*\n${reportData.ownerRemarks}\n\n` : ''}✅ הדוח אושר ומאומת לתשלום`;
+
+            const whatsappURL = `https://wa.me/${reportData.foremanPhone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Modal Management
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+
+        // Success Screen
+        function showSuccess() {
+            document.getElementById('successProject').textContent = reportData.projectName;
+            document.getElementById('successDate').textContent = formatDate(reportData.reportDate);
+            document.getElementById('approvalTime').textContent = n
